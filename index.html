@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Energia Consciente</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="wrap">
+  <h1><span>⚡</span>Energia Consciente</h1>
+  <p class="lead">Descubra quanto cada aparelho da sua casa consome e quanto isso pesa na conta de luz. Pequenas mudanças de hábito reduzem o desperdício e ajudam o planeta.</p>
+  <span class="chip">ODS 7 · Energia acessível e limpa</span>
+  <nav>
+    <button data-v="cadastro" class="active">Cadastrar aparelho</button>
+    <button data-v="lista">Meus aparelhos</button>
+    <button data-v="sim">Simulador de consumo</button>
+  </nav>
+</div></header>
+
+<main>
+<section id="v-cadastro" class="view active">
+  <div class="card narrow">
+    <h2 id="form-titulo">Novo aparelho</h2>
+    <form id="form">
+      <div class="f"><label for="nome">Nome do aparelho</label><input id="nome" placeholder="Ex.: TV da sala" maxlength="40" required></div>
+      <div class="f"><label for="cat">Categoria</label><select id="cat"></select></div>
+      <div class="row2">
+        <div class="f">
+          <div class="lbl"><label for="pot">Potência (W)</label>
+            <span class="tp" id="tp"><button type="button" class="info" aria-label="Onde encontro a potência?" aria-describedby="tip">?</button>
+            <span role="tooltip" id="tip" class="tooltip"><b>Onde encontrar a potência?</b><br>Na etiqueta colada atrás ou embaixo do aparelho, na tampa traseira ou no manual. Procure por "W" ou "Potência". Se só aparecer V (volts) e A (amperes), multiplique: W = V × A.</span></span>
+          </div>
+          <input id="pot" type="number" min="1" step="any" inputmode="decimal" required>
+        </div>
+        <div class="f"><div class="lbl"><label for="horas">Uso (horas/dia)</label></div><input id="horas" type="number" min="0" max="24" step="any" inputmode="decimal" placeholder="4" required></div>
+      </div>
+      <p class="hint" id="pot-hint"></p>
+      <button class="btn" id="salvar">Adicionar aparelho</button>
+      <button class="btn ghost" id="cancelar" type="button" hidden>Cancelar edição</button>
+    </form>
+  </div>
+</section>
+
+<section id="v-lista" class="view">
+  <div class="grid cols">
+    <div class="card"><h2>Meus aparelhos</h2><div id="lista"></div></div>
+    <div class="card"><h2>Consumo total da casa</h2>
+      <div class="stats">
+        <div class="stat"><b class="num" id="t-dia">0</b><span>kWh por dia</span></div>
+        <div class="stat"><b class="num" id="t-mes">0</b><span>kWh por mês</span></div>
+        <div class="stat"><b class="num" id="t-ano">0</b><span>kWh por ano</span></div>
+        <div class="stat"><b class="num" id="t-custo">R$ 0,00</b><span>custo estimado por mês</span></div>
+      </div>
+      <div id="insights"></div>
+    </div>
+  </div>
+</section>
+
+<section id="v-sim" class="view">
+  <div class="card note"><p><b>Como o cálculo funciona:</b> usamos uma tarifa fixa de <b>R$ 0,822 por kWh</b> (residencial convencional, <b>bandeira verde</b>, sem cobrança extra de bandeira amarela ou vermelha).</p>
+  <p>Fórmula: kWh = potência (W) × horas ÷ 1000, e custo = kWh × tarifa. Considera mês de 30 dias e ano de 365 dias. Sua conta real pode ser diferente por causa de impostos, da bandeira do mês e da sua distribuidora.</p></div>
+  <p class="empty" id="sim-vazio">Cadastre ao menos um aparelho para simular.</p>
+  <div class="grid cols" id="sim-box">
+    <div class="card"><h2>O que simular?</h2>
+      <div class="f"><label for="sim-ap">Aparelho</label><select id="sim-ap"></select></div>
+      <div class="f" id="sim-h-wrap"><label for="sim-h">Horas de uso por dia: <b id="sim-h-out" style="color:var(--accent)"></b></label><input id="sim-h" type="range" min="0" max="24" step="0.1"><p class="hint" style="margin:6px 0 0">Mexa no controle para ver o que muda se você usar mais ou menos.</p></div>
+    </div>
+    <div class="card"><h2>Resultado</h2><div class="resg" id="sim-res"></div><p class="hint" id="sim-nota" style="margin:12px 0 0"></p><div id="sim-extra"></div></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>© 2026 Energia Consciente · Projeto do Fórum de Sustentabilidade · ODS 7</p>
+  <p>Valores estimados, apenas para fins educativos.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
